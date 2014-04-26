@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Code Book for UCI HAR Dataset</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Code Book for UCI HAR Dataset</h1>
+
+<h2>Data Source</h2>
+
+<p>This dataset was compiled for use in the following publication: Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012. It was made available thanks to the courtesy of the named authors.</p>
+
+<h2>Data</h2>
+
+<p>The dataset was collected in an experiment where 30 differnt subjects performed six different activities while wearing a smartphone. The activies were walking, walking upstairs, walking downstairs, sitting, standing, and laying. The reslting data was designed to explore machine learning techniques for determining which of the six activites a person was doing from the smartphone sensor data. </p>
+
+<p>Two sensors, an accelerometer and a gyroscope, were used to capture the raw data. For each sensor there were time-based measurements in each axis, X, Y, and Z. For each sensor the effect of gravity was split from the effect of the subject&#39;s movements. From these measurements both the Jerk signals and the magnitude of the signals were calculated. Lastly the time-based measurements were transformed into frequency measurements via a Fast Fourier Transform (FFT). </p>
+
+<p>Finally for each of these measurements several statistics were calculated.  </p>
+
+<ul>
+<li>mean(): Mean value</li>
+<li>std(): Standard deviation</li>
+<li>mad(): Median absolute deviation </li>
+<li>max(): Largest value in array</li>
+<li>min(): Smallest value in array</li>
+<li>sma(): Signal magnitude area</li>
+<li>energy(): Energy measure. Sum of the squares divided by the number of values. </li>
+<li>iqr(): Interquartile range </li>
+<li>entropy(): Signal entropy</li>
+<li>arCoeff(): Autorregresion coefficients with Burg order equal to 4</li>
+<li>correlation(): correlation coefficient between two signals</li>
+<li>maxInds(): index of the frequency component with largest magnitude</li>
+<li>meanFreq(): Weighted average of the frequency components to obtain a mean frequency</li>
+<li>skewness(): skewness of the frequency domain signal </li>
+<li>kurtosis(): kurtosis of the frequency domain signal </li>
+<li>bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.</li>
+<li>angle(): Angle between to vectors.</li>
+</ul>
+
+<h2>Variables</h2>
+
+<p>There are a total of 561 core variables in the dataset. There are 10 time-based measures and 7 frequency measures. The variable names have a structure that denotes where the underlying data came from and what they measure.  </p>
+
+<ul>
+<li>The variables for the time-based measures are prefixed with a &#39;t&#39; while the frequency measures are prefixed with an &#39;f&#39;.<br/></li>
+<li>For each measure there are two components, that due to the subject (denoted as Body) and that due to gravity (denoted as Gravity).<br/></li>
+<li>The source of the data is denoted next. Accelerometer data is denoted as &#39;Acc&#39; and the gyroscope as &#39;Gyro&#39;.<br/></li>
+<li>A label that describes the type of signal, either raw (blank) or jerk (Jerk), and its nature, either raw (blank) or magnitude (Mag), comes next.<br/></li>
+<li>Next is the type of statstic computed on this measurement. This is one of the name statistics listed in the data section above.<br/></li>
+<li>Lastly, is the axis on which the measurement was taken, X, Y, or Z. For some statistics there are two axes, in which case the axes are seperated by a comma.<br/></li>
+</ul>
+
+<h2>Cleaning</h2>
+
+<p>The raw data was already split into a training and a testing set. In addition, the the identifiers, both the activity performed and the subject who performed it are listed in seperate files for each of the training and testing sets. To reincorporate the data in preparation for extracting the desired data table the following steps were followed:  </p>
+
+<h3>Data Labels</h3>
+
+<ol>
+<li>The data file containing the column labels is loaded<br/></li>
+</ol>
+
+<h3>Training Data</h3>
+
+<ol>
+<li>Training data is loaded<br/></li>
+<li>The vector of activity codes for the training data is loaded.<br/></li>
+<li>Activity code vector is appended as the last column in the training data.<br/></li>
+<li>The vector of subject codes for the training data is loaded.<br/></li>
+<li>Subject code vector is prepended as the first column in the training data.<br/></li>
+<li>The columns in the training data are labelled.<br/></li>
+</ol>
+
+<h3>Testing Data</h3>
+
+<ol>
+<li>Testing data is loaded<br/></li>
+<li>The vector of activity codes for the testing data is loaded.<br/></li>
+<li>Activity code vector is appended as the last column in the testing data.<br/></li>
+<li>The vector of subject codes for the training data is loaded.<br/></li>
+<li>Subject code vector is prepended as the first column in the testing data.<br/></li>
+<li>The columns in the testing data are labelled.<br/></li>
+</ol>
+
+<h3>Data Merger and Transformation</h3>
+
+<ol>
+<li>The testing data is appended to the training data<br/></li>
+<li>The vector of descriptive names for the Activity codes is loaded<br/></li>
+<li>The numeric Activity codes are replaced with thier more descriptive names<br/></li>
+<li>The merged data is transformed from its long form to a compact form<br/></li>
+<li>The compact data is grouped by the Activity followed by the Subject and the values all the variables are aggregated by taking their mean.<br/></li>
+<li>The resultant table is written to disk for later use.<br/></li>
+</ol>
+
+</body>
+
+</html>
+
