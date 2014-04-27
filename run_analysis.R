@@ -43,15 +43,12 @@ if (have.data) {
   file_index<-file_index+1
   train_file<-data_files[file_index]
   train<-read.table(train_file)
-  #Label the train data columns
-  colnames(train)<-labels[,2]
   
   #Load the activity codes for the train data
   #"./data/train/y_train.txt"
   file_index<-file_index+1
   train_file<-data_files[file_index]
   train_y<-read.table(train_file)
-  colnames(train_y)<-c("Activity")
   #Combine the actvity codes into the train data
   train<-cbind(train,train_y)
   rm(train_y)
@@ -61,7 +58,6 @@ if (have.data) {
   file_index<-file_index+1
   train_file<-data_files[file_index]
   train_subject<-read.table(train_file)
-  colnames(train_subject)<-c("Subject")
   #Combine the subjects with the train data
   train<-cbind(train_subject,train)
   rm(train_subject)
@@ -104,15 +100,11 @@ if (have.data) {
   rm(test)
   
   #STEP 2: Extract only the columns with mean and standard deviation measurements
-  #Get a vector of the indices for the columns containing mean measurements
-  mean_cols<-grep("mean\\(\\)",labels)
-  #Extract those mean measurements
-  means<-data[,mean_cols]
-  
-  #Get a vector of the indices for the columns containing standard deviation measurements
-  stddev_cols<-grep("std\\(\\)",labels)
-  #Extract those standard deviation measurements
-  stddevs<-data[,stddev_cols]
+  #Get a vector of the indices for the columns containing mean or standard deviation measurements
+  #NOTE: This captures all mean or standard deviation measurements except where the mean or std dev measure is really being used to compute some other measurement, i.e., angle.
+  mean_std_cols<-grep("mean|std",labels)
+  #Extract those mean or standard deviation measurements
+  data<-data[,c(1,mean_std_cols,ncol(data))]
   
   #STEP 3: Get the descriptive names for the activities
   #Load the activty names
@@ -128,8 +120,11 @@ if (have.data) {
   #STEP 5: Generate a new tidy dataset
   library(reshape2)
   id_cols<-labels[c(length(labels),1)]
+  #var_cols<-labels[3:length(labels)-1]
+  #melted<-melt(data,id.vars=id_cols,measure.vars=var_cols)
   melted<-melt(data,id.vars=id_cols)
   casted<-dcast(melted,Activity + Subject ~ ...,mean)
+  head(casted[c(1:3,81)],30)
   
   #STEP 6: Output data frame as text table
   data_file<-"./data.txt"
